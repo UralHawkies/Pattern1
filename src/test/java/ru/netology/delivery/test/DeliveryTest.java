@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
@@ -32,10 +34,10 @@ class DeliveryTest {
         $x("//*[@data-test-id=\"phone\"]//self::input").setValue(validUser.getPhone());
         $x("//*[@data-test-id=\"agreement\"]").click();
         $x("//*[@class=\"button__text\"]").click();
-        $x("//*[@data-test-id=\"success-notification\"]").shouldHave(exactText("Успешно!\n" + "Встреча успешно запланирована на " + firstMeetingDate));
+        $x("//*[@data-test-id=\"success-notification\"]").shouldHave(exactText("Успешно!\n" + "Встреча успешно запланирована на " + firstMeetingDate), Duration.ofSeconds(5));
         $x("//*[@data-test-id=\"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE, secondMeetingDate);
         $x("//*[@class=\"button__text\"]").click();
         $x("//*[@data-test-id=\"replan-notification\"]").click();
-        $x("//*[@data-test-id=\"success-notification\"]").shouldHave(exactText("Успешно!\n" + "Встреча успешно запланирована на " + secondMeetingDate));
+        $x("//*[@data-test-id=\"success-notification\"]").shouldHave(exactText("Успешно!\n" + "Встреча успешно запланирована на " + secondMeetingDate), Duration.ofSeconds(5));
     }
 }
